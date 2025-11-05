@@ -22,11 +22,19 @@ client = MongoClient(uri, server_api=ServerApi('1'))
 db = client['Ice_Cream']
 collection = db['Ice_Cream_Pred']
 
+# def load_model():
+#     with open("Ice_Cream_sales_final_model.pkl", "rb") as file:
+#         model = pickle.load(file)
+#     return model
+
 def load_model():
-    with open("Ice_Cream_sales_final_model.pkl", "rb") as file:
+    model_path = "Ice_Cream_sales_final_model.pkl"
+    if not os.path.exists(model_path):
+        st.error(f"Model file not found: {model_path}")
+        st.stop()  # Stop app gracefully
+    with open(model_path, "rb") as file:
         model = pickle.load(file)
     return model
-
 
 def predict_data(data):
     model = load_model()
