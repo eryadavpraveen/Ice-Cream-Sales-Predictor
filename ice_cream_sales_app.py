@@ -28,7 +28,7 @@ collection = db['Ice_Cream_Pred']
 #     return model
 
 def load_model():
-    model_path = "Ice_Cream_sales_final_model.pkl"
+    model_path = "Ice_Cream_Sales_final_model.pkl"
     if not os.path.exists(model_path):
         st.error(f"Model file not found: {model_path}")
         st.stop()  # Stop app gracefully
