@@ -6,15 +6,21 @@ from sklearn.preprocessing import StandardScaler
 import pymongo
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+import os
+from dotenv import load_dotenv
 
 
-uri = "mongodb+srv://eryadavpraveen:26102005@eryadavpraveen.pqmmcfd.mongodb.net/?retryWrites=true&w=majority&appName=eryadavpraveen"
+# Load environment variables (only needed for local runs)
+load_dotenv()
 
-# Create a new client and connect to the server
+# Securely load URI from environment
+uri = os.getenv("MONGODB_URI")
+
+
+# Connect to MongoDB
 client = MongoClient(uri, server_api=ServerApi('1'))
-db= client['Ice_Cream']
+db = client['Ice_Cream']
 collection = db['Ice_Cream_Pred']
-
 
 def load_model():
     with open("Ice_Cream_sales_final_model.pkl", "rb") as file:
